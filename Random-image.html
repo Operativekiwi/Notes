@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Random Image API</title>
+  </head>
+  <body>
+    <div id="image-container"></div>
+    <button id="update-button">Update Image</button>
+    <script>
+      const imageContainer = document.getElementById('image-container');
+      const updateButton = document.getElementById('update-button');
+
+      // Function to make a request to the API endpoint and update the displayed image
+      function updateImage() {
+        fetch('http://localhost:5000/random-image')
+          .then(response => response.blob()) // Extract the image file from the response
+          .then(imageBlob => {
+            // Create an image element and set its src to the image file
+            const imageElement = document.createElement('img');
+            imageElement.src = URL.createObjectURL(imageBlob);
+            imageElement.alt = 'Random Image';
+
+            // Clear the image container and append the new image element
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(imageElement);
+          });
+      }
+
+      // Load the initial image
+      updateImage();
+
+      // Add an event listener to the update button to update the image when clicked
+      updateButton.addEventListener('click', updateImage);
+    </script>
+  </body>
+</html>
