@@ -1,11 +1,13 @@
 import os
 import random
 from flask import Flask, send_file
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Set the local storage location for images
-IMAGE_FOLDER = '/path/to/local/image/folder'
+IMAGE_FOLDER = 'C:\\Users\\GGPC\\Documents\\Projects\\Random-Images\\Images'
 
 @app.route('/random-image')
 def get_random_image():
